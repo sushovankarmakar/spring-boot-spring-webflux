@@ -1,0 +1,15 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: SPRING-BOOT-SPRING-WEBFLUX
+#  data:
+#    mongodb:
+#      uri: mongodb://springuser:springpass@localhost:27017/springdb
+#      authentication-database: admin
+#      username: root
+#      password: root
+#      database: web-flux-example
+#      port: 27017
+#      host: localhost
