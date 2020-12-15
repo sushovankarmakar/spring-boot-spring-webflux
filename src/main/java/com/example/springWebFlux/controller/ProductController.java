@@ -32,9 +32,11 @@ public class ProductController {
     }
 
     @PostMapping
-    public Mono<Product> saveProduct(@RequestBody Product product) {
+    public Mono<ResponseEntity<Product>> saveProduct(@RequestBody Product product) {
         log.info("Save product");
-        return productService.save(product);
+        return productService.save(product)
+                .map(savedProduct -> new ResponseEntity<>(savedProduct, HttpStatus.CREATED))
+                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
     @GetMapping(value = "/{id}")
@@ -42,7 +44,7 @@ public class ProductController {
         log.info("Get product by id");
         return productService.findById(productId)
                 .map(product -> ResponseEntity.ok(product))
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping(value = "/{id}")
@@ -58,7 +60,7 @@ public class ProductController {
     public Mono<ResponseEntity<Product>> deleteProductById(@PathVariable(value = "id") String productId) {
         log.info("Delete product by id");
         return productService.deleteByProductId(productId)
-                .map(deletedProduct -> new ResponseEntity<>(deletedProduct, HttpStatus.NO_CONTENT))
+                .map(deletedProduct -> new ResponseEntity<>(deletedProduct, HttpStatus.OK))
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
