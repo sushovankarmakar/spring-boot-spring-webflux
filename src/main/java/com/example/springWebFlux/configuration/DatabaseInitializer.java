@@ -16,8 +16,12 @@ import java.util.concurrent.ThreadLocalRandom;
 @Log4j2
 public class DatabaseInitializer implements ApplicationListener<ApplicationReadyEvent> {
 
-    @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    public DatabaseInitializer(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {

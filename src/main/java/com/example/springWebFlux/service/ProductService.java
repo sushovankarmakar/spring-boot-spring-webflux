@@ -12,5 +12,6 @@ public interface ProductService {
     Flux<Product> findAll();
     Mono<Product> save(Product product);
     Mono<Product> deleteByProductId(String productId);
+    Mono<Product> updateByProductId(String productId, Product toBeUpdatedProduct);
 
 }
