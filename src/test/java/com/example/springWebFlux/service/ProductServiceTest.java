@@ -12,8 +12,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -23,8 +21,12 @@ import java.util.concurrent.ThreadLocalRandom;
 @Log4j2
 public class ProductServiceTest {
 
+    private ProductService productService;
+
     @Autowired
-    private ProductServiceImpl productService;
+    public ProductServiceTest(ProductService productService) {
+        this.productService = productService;
+    }
 
     @Test
     public void saveTest() {
